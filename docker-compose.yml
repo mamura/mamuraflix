@@ -1,0 +1,29 @@
+services:
+  backend:
+    image: ghcr.io/mamura/php82-node16:latest
+    labels:
+      - traefik.http.routers.api-mamuraflix.rule=Host(`api-mamuraflix.mamura.test`)
+    volumes:
+      - ./backend:/src
+    environment:
+      - PROJECT_WEBROOT=/src/public
+
+  database:
+    image: mysql:latest
+    labels:
+      - traefik.http.routers.mysql-mamuraflix.rule=Host(`mysql.mamuraflix.test`)
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_DATABASE: "mamuraflix"
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+      - ./mysql/dumps:/var/dumps
+    networks:
+      - default
+
+networks:
+  default:
+      name: dev-network
+      external: true
