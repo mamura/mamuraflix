@@ -1,6 +1,6 @@
 services:
-  backend:
-    image: ghcr.io/mamura/php82-node16:latest
+  app:
+    image: mamura/php82-node16:latest
     labels:
       - traefik.http.routers.api-mamuraflix.rule=Host(`api-mamuraflix.mamura.test`)
     volumes:
