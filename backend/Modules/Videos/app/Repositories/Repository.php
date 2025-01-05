@@ -1,5 +1,5 @@
 <?php
-namespace App\Repositories;
+namespace Modules\Videos\Repositories;
 
 class Repository
 {
@@ -111,5 +111,14 @@ class Repository
         }
 
         return false;
+    }
+
+    public function makeReturn($status, $message, $data)
+    {
+        return [
+            'sucess'    => $status,
+            'message'   => $message,
+            'data'      => $data
+        ];
     }
 }

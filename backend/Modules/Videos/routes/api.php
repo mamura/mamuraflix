@@ -13,10 +13,10 @@ use Modules\Videos\Http\Controllers\VideosController;
  * is assigned the "api" middleware group. Enjoy building your API!
  *
 */
-Route::name('videos')->group(function () {
-    Route::post('video', [VideosController::class, 'create'])->name('create');
-});
-
-Route::middleware(['auth:sanctum'])->prefix('v1')->group(function () {
-    Route::apiResource('videos', VideosController::class)->names('videos');
+Route::name('videos.')->group(function () {
+    Route::get('videos', [VideosController::class, 'list'])->name('list');
+    Route::post('video', [VideosController::class, 'store'])->name('save');
+    Route::get('video/{id}', [VideosController::class, 'find'])->name('find');
+    Route::put('video', [VideosController::class, 'store'])->name('update');
+    Route::delete('video/{id}', [VideosController::class, 'delete'])->name('delete');
 });

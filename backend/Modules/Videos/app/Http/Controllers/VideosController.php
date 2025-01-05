@@ -3,64 +3,37 @@
 namespace Modules\Videos\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+
 use Illuminate\Http\Request;
 use Modules\Videos\Http\Requests\RequestStoreVideo;
+use Modules\Videos\Repositories\VideosRepository;
 
 class VideosController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    private $repository;
+
+    public function __construct()
     {
-        return view('videos::index');
+        $this->repository = new VideosRepository();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function list()
     {
-        return response()->json(['teste' => 'teste']);
+        return response()->json($this->repository->list());
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    public function find($id)
+    {
+        return response()->json($this->repository->find($id));
+    }
+
     public function store(RequestStoreVideo $request)
     {
-        
+        return response()->json($this->repository->save($request));
     }
 
-    /**
-     * Show the specified resource.
-     */
-    public function show($id)
+    public function delete($id)
     {
-        return view('videos::show');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit($id)
-    {
-        return view('videos::edit');
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy($id)
-    {
-        //
+        return response()->json($this->repository->delete($id));
     }
 }

@@ -14,6 +14,4 @@ use Modules\Videos\Http\Controllers\VideosController;
 |
 */
 
-Route::group([], function () {
-    Route::resource('videos', VideosController::class)->names('videos');
-});
+
